@@ -47,11 +47,46 @@ public class BankTest {
         assertEquals(50, bank.getBalance());
     }
 
+    @Test
     public void testDepositNegative(){
         bank.setBalance(0);
         bank.setMinimumBalance(0);
         double money = -50;
 
         assertThrows(IllegalArgumentException.class, () -> account.deposit(money));
+    }
+
+    @Test
+    public void testWithdraw(){
+        bank.setBalance(30);
+        bank.setMinimumBalance(0);
+        double money = 20;
+        bank.withdraw(money);
+        assertEquals(10, bank.getBalance());
+    }
+
+    @Test
+    public void testWithdraw2(){
+        bank.setBalance(30);
+        bank.setMinimumBalance(-100);
+        double money = 40;
+        bank.withdraw(money);
+        assertEquals(-10, bank.getBalance());
+    }
+
+    @Test
+    public void testWithdrawMoreThanAllowed(){
+        bank.setBalance(30);
+        bank.setMinimumBalance(0);
+        double money = 50;
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(money));
+    }
+
+    @Test
+    public void testWithdrawNegativeAmount(){
+        bank.setBalance(30);
+        bank.setMinimumBalance(0);
+        double money = -50;
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(money));
     }
 }
