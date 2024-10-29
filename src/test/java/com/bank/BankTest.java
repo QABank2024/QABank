@@ -9,11 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BankTest {
 
     private Bank bank;
+    private CurrentAccount currentAccount;
 
     @BeforeEach
     public void setUp() {
         bank = new Bank();
-
+        currentAccount = new CurrentAccount();
     }
 
     @Test
@@ -88,5 +89,24 @@ public class BankTest {
         bank.setMinimumBalance(0);
         double money = -50;
         assertThrows(IllegalArgumentException.class, () -> bank.withdraw(money));
+    }
+
+    @Test
+    public void testCurrentAccountWithdrawOKAmount(){
+        currentAccount.setBalance(30);
+        currentAccount.setMinimumBalance(0);
+        currentAccount.setMaximumWithdrawal(25);
+        double money = 20;
+        currentAccount.withdraw(money);
+        assertEquals(10, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testCurrentAccountWithdrawNotOKAmount(){
+        currentAccount.setBalance(30);
+        currentAccount.setMinimumBalance(0);
+        currentAccount.setMaximumWithdrawal(25);
+        double money = 30;
+        assertThrows(IllegalArgumentException.class, () -> currentAccount.withdraw(money));
     }
 }
