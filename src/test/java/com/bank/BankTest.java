@@ -10,11 +10,14 @@ public class BankTest {
 
     private Bank bank;
     private CurrentAccount currentAccount;
+    private SavingsAccount savingsAccount;
+
 
     @BeforeEach
     public void setUp() {
         bank = new Bank();
         currentAccount = new CurrentAccount();
+        savingsAccount = new SavingsAccount();
     }
 
     @Test
@@ -108,5 +111,13 @@ public class BankTest {
         currentAccount.setMaximumWithdrawal(25);
         double money = 30;
         assertThrows(IllegalArgumentException.class, () -> currentAccount.withdraw(money));
+    }
+
+    @Test
+    public void testSavingsAccountInterest(){
+        savingsAccount.setBalance(100);
+        savingsAccount.setInterestRate(0.04);
+        savingsAccount.addInterest();
+        assertEquals(104, savingsAccount.getBalance());
     }
 }
