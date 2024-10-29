@@ -12,6 +12,7 @@ public class BankTest {
     @BeforeEach
     public void setUp() {
         bank = new Bank();
+
     }
 
     @Test
@@ -33,5 +34,15 @@ public class BankTest {
         double minBalance = 100.0;
         bank.setMinimumBalance(minBalance);
         assertEquals(minBalance, bank.getMinimumBalance());
+    }
+
+    @Test
+    public void testDeposit(float amount){
+        bank.setAccountHolderName("John Doe");
+        bank.setBalance(0);
+        bank.setMinimumBalance(0);
+        float money = 50;
+        bank.deposit(50);
+        assertEquals(50, bank.getBalance());
     }
 }
