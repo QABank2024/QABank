@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BankTest {
 
@@ -37,12 +38,20 @@ public class BankTest {
     }
 
     @Test
-    public void testDeposit(float amount){
+    public void testDeposit(){
         bank.setAccountHolderName("John Doe");
         bank.setBalance(0);
         bank.setMinimumBalance(0);
         float money = 50;
-        bank.deposit(50);
+        bank.deposit(money);
         assertEquals(50, bank.getBalance());
+    }
+
+    public void testDepositNegative(){
+        bank.setBalance(0);
+        bank.setMinimumBalance(0);
+        double money = -50;
+
+        assertThrows(IllegalArgumentException.class, () -> account.deposit(money));
     }
 }
