@@ -30,4 +30,25 @@ public class Bank {
         this.MinimumBalance = newMinimumBalance;
     }
 
+    public void deposit(double money){
+        if (money < 0) {
+            throw new IllegalArgumentException("Money can not be negative");
+        }else{
+            setBalance(money + this.getBalance());
+        }
+    }
+
+    public void withdraw(double money){
+        if (money < 0){
+            throw new IllegalArgumentException("Money can not be negative");
+        }
+        else if (this.getBalance()-money > this.getMinimumBalance()){
+            setBalance(this.getBalance()-money);
+        }
+
+        else{
+            throw new IllegalArgumentException("Balance goes below minimum allowed!");
+        }
+    }
+
 }

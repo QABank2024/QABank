@@ -53,7 +53,7 @@ public class BankTest {
         bank.setMinimumBalance(0);
         double money = -50;
 
-        assertThrows(IllegalArgumentException.class, () -> account.deposit(money));
+        assertThrows(IllegalArgumentException.class, () -> bank.deposit(money));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class BankTest {
         bank.setBalance(30);
         bank.setMinimumBalance(0);
         double money = 50;
-        assertThrows(IllegalArgumentException.class, () -> account.withdraw(money));
+        assertThrows(IllegalArgumentException.class, () -> bank.withdraw(money));
     }
 
     @Test
@@ -87,6 +87,6 @@ public class BankTest {
         bank.setBalance(30);
         bank.setMinimumBalance(0);
         double money = -50;
-        assertThrows(IllegalArgumentException.class, () -> account.withdraw(money));
+        assertThrows(IllegalArgumentException.class, () -> bank.withdraw(money));
     }
 }
